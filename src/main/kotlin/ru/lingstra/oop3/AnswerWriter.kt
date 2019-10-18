@@ -4,8 +4,9 @@ import java.io.File
 
 class AnswerWriter {
 
-    fun print(ans: List<List<Int>>, size: Int) {
+    fun print(ans: List<List<Int>>, size: Int, time: Long) {
         File("answer$size.txtLab").printWriter().use { out ->
+            out.println("Time: $time")
             var i = 0
             ans.forEach {
                 i++
