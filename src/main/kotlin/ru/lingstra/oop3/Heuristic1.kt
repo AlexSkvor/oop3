@@ -1,25 +1,25 @@
 package ru.lingstra.oop3
 
-class Heuristic1() {
+class Heuristic1 {
 
-    fun pack(items: List<Int>, containerSize: Int = 1000000): List<List<Int>> {
-        val ans: MutableList<MutableList<Int>> = mutableListOf<MutableList<Int>>()
+    fun pack(items: List<Int>): List<Container> {
+        val ans: MutableList<Container> = mutableListOf()
         val given = mutableListOf<Int>().apply { addAll(items) }
         while (given.isNotEmpty()) {
             val nextToPlace = given.first()
             given.removeAt(0)
-            place(nextToPlace, ans, containerSize)
+            place(nextToPlace, ans)
         }
         return ans
     }
 
-    private fun place(next: Int, packs: MutableList<MutableList<Int>>, containerSize: Int) {
+    private fun place(next: Int, packs: MutableList<Container>) {
         packs.forEach {
-            if (it.sum() + next < containerSize) {
+            if (it.remainingSize >= next) {
                 it.add(next)
                 return
             }
         }
-        packs.add(mutableListOf(next))
+        packs.add(Container(next))
     }
 }
