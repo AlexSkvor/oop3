@@ -12,7 +12,7 @@ class InputGenerator {
     private fun generateFile(size: Int) {
         val list = mutableListOf<Int>()
         for (i in 0 until size) {
-            list.add(Random.nextInt(1, 1000000))
+            list.add(Random.nextInt(1, 100000))
         }
         File("task$size.txtLab").printWriter().use { out ->
             list.sortedDescending().forEach {
