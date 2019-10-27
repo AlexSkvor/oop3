@@ -16,7 +16,7 @@ object App {
         val clever = Heuristic2()
 
         task.forEach {
-            if (it < 1) {
+            if (it < 200001) {
                 val test = reader.read(it)
                 val start = Date().time
                 val answer = stupid.pack(test)
