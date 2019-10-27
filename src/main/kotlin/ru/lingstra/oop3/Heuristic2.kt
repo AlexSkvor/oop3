@@ -1,20 +1,17 @@
 package ru.lingstra.oop3
 
 import ru.lingstra.oop3.Container.Companion.MAX_SIZE
+import kotlin.collections.ArrayList
 
 class Heuristic2 {
 
     fun pack(items: List<Int>): List<Container> {
-        if (items.size <= 10000) return Heuristic1().pack(items)
-        val ans: MutableList<Container> = mutableListOf()
-        val given = mutableListOf<Int>().apply { addAll(items) }
-
-        while (given.isNotEmpty()) {
-            val nextToPlace = given.first()
-            given.removeAt(0)
-            if (nextToPlace > MAX_SIZE / 2) ans.add(Container(nextToPlace))
-            else insert(nextToPlace, ans)
+        val ans: MutableList<Container> = ArrayList((items.size * 0.6f).toInt())
+        items.forEach {
+            if (it > MAX_SIZE / 2) ans.add(Container(it))
+            else insert(it, ans)
         }
+
         return ans
     }
 
@@ -37,7 +34,7 @@ class Heuristic2 {
     }
 
     private fun MutableList<Container>.insertOrdered(new: Container) {
-        val searchResult = binarySearch { it.remainingSize - new.remainingSize }
+        val searchResult = binarySearch { new.currentSize - it.currentSize }
         val index = indexFromFound(searchResult) + 1
         add(index, new)
     }

@@ -17,7 +17,6 @@ data class Container(
     fun add(item: Int) {
         items.add(item)
         currentSize += item
-        require(currentSize <= MAX_SIZE) { "Too much for this $this" }
     }
 
     fun canAdd(item: Int) = currentSize + item <= MAX_SIZE
